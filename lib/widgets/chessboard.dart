@@ -9,7 +9,7 @@ import 'package:flutter_stateless_chessboard/models/short_move.dart';
 import 'package:flutter_stateless_chessboard/models/square.dart';
 import 'package:flutter_stateless_chessboard/utils.dart';
 import 'package:flutter_stateless_chessboard/widgets/ui_square.dart';
-import 'package:fpdart/fpdart.dart' show Option;
+import 'package:fpdart/fpdart.dart' show FpdartOnOption, Option;
 import 'package:provider/provider.dart';
 
 class Chessboard extends StatefulWidget {
@@ -94,6 +94,7 @@ class _ChessboardState extends State<Chessboard> {
 
   void _handleClick(HalfMove halfMove) {
     clickMove.match(
+      () => _setClickMove(halfMove),
       (t) {
         final sameSquare = t.square == halfMove.square;
         final sameColorPiece = t.piece
@@ -111,8 +112,8 @@ class _ChessboardState extends State<Chessboard> {
           ));
           _clearClickMove();
         }
-      },
-      () => _setClickMove(halfMove),
+      }
+
     );
   }
 
